@@ -57,7 +57,7 @@
 </head>
 <body>
 <div id="ui-panel">
-  <h3>PINK HELICOPTER – FULL ORBIT</h3>
+  <h3>🎀 PINK HELICOPTER – FULL ORBIT</h3>
   <div class="key-row"><span>🖱️ LEFT DRAG</span><span> → Orbit (see bottom too!)</span></div>
   <div class="key-row"><span>🖱️ RIGHT DRAG</span><span> → Rotate light</span></div>
   <div class="key-row"><span>🖱️ LEFT CLICK</span><span> → Spotlight ON/OFF</span></div>
@@ -67,7 +67,7 @@
   <div class="key-row"><span>⌨️ Q/E , SCROLL</span><span> → Zoom</span></div>
 </div>
 <div id="hud-right">
-  <div class="hud-line"><span class="hud-label">CAM (θ/φ/r)</span><span id="camStats" class="hud-value">45° 50° 24</span></div>
+  <div class="hud-line"><span class="hud-label">CAM (θ/φ/r)</span><span id="camStats" class="hud-value">45° 50° 26</span></div>
   <div class="hud-line"><span class="hud-label">💡 SPOTLIGHT</span><span id="lightState" class="hud-value">ON</span></div>
   <div class="hud-line"><span class="hud-label">🌀 ROTOR</span><span id="rotorState" class="hud-value">NORMAL</span></div>
   <div class="hud-line"><span class="hud-label">🔲 WIREFRAME</span><span id="wireState" class="hud-value">OFF</span></div>
@@ -108,7 +108,7 @@
   }
   updateCamera();
 
-  // --- Pink texture (hearts, no stickers)
+  // --- Pink texture (hearts, sparkles – no stickers)
   const canvasTex = document.createElement('canvas');
   canvasTex.width = 1024;
   canvasTex.height = 1024;
@@ -159,8 +159,10 @@
       gl_FragColor = vec4(col, 1.0);
     }
   `;
-  const rotorVert = ` varying vec3 vNormal; varying vec3 vWorldPos; varying vec2 vUv;
-    void main() { vUv = uv; vNormal = normalize(normalMatrix * normal); vWorldPos = (modelMatrix * vec4(position,1.0)).xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+  const rotorVert = `
+    varying vec3 vNormal; varying vec3 vWorldPos; varying vec2 vUv;
+    void main() { vUv = uv; vNormal = normalize(normalMatrix * normal); vWorldPos = (modelMatrix * vec4(position,1.0)).xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }
+  `;
   const rotorFrag = `
     uniform vec3 uLightPos; uniform bool uSpotOn; uniform vec3 uCameraPos;
     varying vec3 vNormal; varying vec3 vWorldPos; varying vec2 vUv;
@@ -179,8 +181,10 @@
       gl_FragColor = vec4(color, 0.96);
     }
   `;
-  const groundVert = ` varying vec3 vWorldPos; varying vec2 vUv;
-    void main() { vUv = uv; vWorldPos = (modelMatrix * vec4(position,1.0)).xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+  const groundVert = `
+    varying vec3 vWorldPos; varying vec2 vUv;
+    void main() { vUv = uv; vWorldPos = (modelMatrix * vec4(position,1.0)).xyz; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }
+  `;
   const groundFrag = `
     uniform vec3 uLightPos; uniform bool uSpotOn;
     varying vec3 vWorldPos; varying vec2 vUv;
@@ -375,7 +379,7 @@
   animate();
 
   window.addEventListener('resize',()=>{ camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,window.innerHeight); });
-  showToast("PINK HELICOPTER – Drag mouse to see BOTTOM view!");
+  showToast("🎀 PINK HELICOPTER – Drag mouse to see BOTTOM view! 🚁");
 </script>
 </body>
 </html>
